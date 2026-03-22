@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Geomapper V2.0 - 专业地理数据制图平台</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-tint": "#0053db",
+              "inverse-primary": "#b4c5ff",
+              "surface-container": "#ededf9",
+              "error-container": "#ffdad6",
+              "secondary": "#495c95",
+              "on-tertiary-container": "#ffede6",
+              "on-secondary-fixed-variant": "#31447b",
+              "primary": "#2563EB",
+              "primary-container": "#2563eb",
+              "background": "#faf8ff",
+              "on-secondary": "#ffffff",
+              "on-surface-variant": "#434655",
+              "surface-variant": "#e1e2ed",
+              "tertiary-fixed-dim": "#ffb596",
+              "surface-container-lowest": "#ffffff",
+              "on-background": "#191b23",
+              "on-error-container": "#93000a",
+              "surface": "#faf8ff",
+              "on-secondary-container": "#394c84",
+              "outline-variant": "#c3c6d7",
+              "surface-container-low": "#f3f3fe",
+              "on-tertiary-fixed": "#360f00",
+              "surface-dim": "#d9d9e5",
+              "outline": "#737686",
+              "on-primary-container": "#eeefff",
+              "tertiary-container": "#bc4800",
+              "secondary-fixed-dim": "#b4c5ff",
+              "on-primary-fixed": "#00174b",
+              "on-primary-fixed-variant": "#003ea8",
+              "surface-container-highest": "#e1e2ed",
+              "on-tertiary-fixed-variant": "#7d2d00",
+              "secondary-container": "#acbfff",
+              "on-surface": "#191b23",
+              "secondary-fixed": "#dbe1ff",
+              "tertiary-fixed": "#ffdbcd",
+              "surface-container-high": "#e7e7f3",
+              "inverse-on-surface": "#f0f0fb",
+              "on-primary": "#ffffff",
+              "inverse-surface": "#2e3039",
+              "on-tertiary": "#ffffff",
+              "on-secondary-fixed": "#00174b",
+              "tertiary": "#943700",
+              "error": "#ba1a1a",
+              "primary-fixed": "#dbe1ff",
+              "on-error": "#ffffff",
+              "surface-bright": "#faf8ff",
+              "primary-fixed-dim": "#b4c5ff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        display: inline-block;
+        line-height: 1;
+        text-transform: none;
+        letter-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        direction: ltr;
+      }
+      .glass-panel {
+        background: rgba(250, 248, 255, 0.7);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+      }
+      .hero-gradient {
+        background: linear-gradient(135deg, #2563EB 0%, #1d4ed8 100%);
+      }
+      .mesh-bg {
+        background-color: #faf8ff;
+        background-image: 
+          radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.05) 0px, transparent 50%),
+          radial-gradient(at 100% 100%, rgba(37, 99, 235, 0.05) 0px, transparent 50%);
+      }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-50/80 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center h-20 px-12 max-w-[1920px] mx-auto">
+<div class="text-2xl font-black tracking-tighter text-blue-700">Geomapper V2.0</div>
+<div class="hidden md:flex items-center space-x-8 font-['Manrope'] font-medium text-sm tracking-tight">
+<a class="text-blue-700 font-bold border-b-2 border-blue-700 pb-1" href="#">产品</a>
+<a class="text-slate-600 hover:text-blue-600 transition-colors" href="#">功能</a>
+<a class="text-slate-600 hover:text-blue-600 transition-colors" href="#">定价</a>
+<a class="text-slate-600 hover:text-blue-600 transition-colors" href="#">关于我们</a>
+</div>
+<div class="flex items-center space-x-6">
+<button class="text-slate-600 font-medium text-sm hover:opacity-80 transition-all">登录</button>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-full font-bold text-sm hover:opacity-90 active:scale-95 transition-all duration-200">立即体验</button>
+</div>
+</div>
+<div class="bg-slate-200/50 h-[1px] w-full absolute bottom-0"></div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative min-h-[921px] flex items-center overflow-hidden px-12 py-24">
+<div class="max-w-[1920px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="z-10">
+<span class="inline-block px-4 py-1.5 rounded-full bg-primary-container/10 text-primary font-bold text-xs tracking-widest uppercase mb-6">NEXT GENERATION GIS</span>
+<h1 class="font-headline font-extrabold text-5xl lg:text-7xl text-on-background leading-[1.1] tracking-tighter mb-8">
+                        告别 ESA 龟速！<br/>
+<span class="text-primary">秒级下载</span> 全球遥感影像
+                    </h1>
+<p class="text-on-surface-variant text-xl leading-relaxed max-w-xl mb-10">
+                        Sentinel-1/2、Landsat 全波段、30m DEM 等影像秒级直达。支持在线 NDVI 计算，专为国内遥感人打造的极速地理数据平台 —— Geomapper。
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="hero-gradient text-on-primary px-10 py-4 rounded-full font-headline font-bold text-lg shadow-lg hover:shadow-primary/20 transition-all active:scale-95">
+                            立即体验
+                        </button>
+<button class="bg-surface-container-high text-on-surface px-10 py-4 rounded-full font-headline font-bold text-lg hover:bg-surface-dim transition-all active:scale-95">
+                            查看文档
+                        </button>
+</div>
+</div>
+<div class="relative lg:h-[600px] rounded-lg overflow-hidden shadow-2xl group">
+<img alt="Satellite Data Visualization" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8ymXNiZ_9v5JV65xfD02ae4ahSxjbfk3JgKYMryWf27XhCbsUd-XTEGlUn5jfO41Ax_2xwrklEjzxdnhTWP3OEaeJcsqthNAAL5lHpA9IUWHJ0FOVag6lOZqdOu8HPlO89tccetBMlDYifNUEi2pT72QxtLOhRGBA4L4EkmJdBvrMU5mtevT9AWWH3Kl9kfeSZqXsm-JFA3u-In6IxSKa0ExB70N8tvU47xEun4ltfJPFxBkmgPshCe-xJoWsiujKbM9IxMU0qrs"/>
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent"></div>
+<div class="absolute bottom-8 right-8 glass-panel p-6 rounded-md max-w-xs shadow-xl border border-white/20">
+<div class="flex items-center gap-4 mb-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">speed</span>
+<span class="font-headline font-bold text-on-surface">实测下行速度</span>
+</div>
+<div class="text-3xl font-black text-primary mb-1">12.4 MB/s</div>
+<div class="text-xs text-on-surface-variant font-medium">节点：中国上海高性能算力中心</div>
+</div>
+</div>
+</div>
+<!-- Decorative Background Elements -->
+<div class="absolute top-0 right-0 -z-10 w-1/3 h-full opacity-5">
+<svg viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<path d="M44.7,-76.4C58.1,-69.2,69.2,-58.1,76.4,-44.7C83.7,-31.3,87,-15.7,85.6,-0.8C84.2,14.1,78,28.2,69.5,40.4C61,52.6,50.2,62.9,37.6,70.5C25.1,78.1,10.8,83,1.9,79.7C-6.9,76.4,-13.8,64.9,-21.1,57.1C-28.4,49.3,-36,45.2,-46.3,38.9C-56.6,32.6,-69.6,24.1,-75.7,12.3C-81.8,0.5,-81, -14.6,-74.6,-27.2C-68.2,-39.8,-56.2,-49.9,-43.3,-57.5C-30.4,-65.1,-16.7,-70.2,-0.9,-68.6C14.8,-67.1,29.7,-58.8,44.7,-76.4Z" fill="#2563EB" transform="translate(100 100)"></path>
+</svg>
+</div>
+</section>
+<!-- Core Capabilities (Bento Grid) -->
+<section class="py-24 px-12 bg-surface-container-low">
+<div class="max-w-[1920px] mx-auto">
+<div class="mb-16 text-center max-w-3xl mx-auto">
+<h2 class="font-headline font-extrabold text-4xl text-on-background mb-4">核心数据能力</h2>
+<p class="text-on-surface-variant text-lg">基于自研高性能渲染引擎，提供从原始数据到在线分析的全链路服务</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Optical Imagery -->
+<div class="md:col-span-8 bg-surface-container-lowest p-10 rounded-lg flex flex-col justify-between group border border-slate-100 shadow-sm">
+<div class="flex justify-between items-start mb-12">
+<div>
+<h3 class="font-headline font-bold text-3xl text-on-background mb-4">光学影像王者</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">Sentinel-2</span>
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">Landsat 8/9</span>
+<span class="px-3 py-1 bg-tertiary/10 text-tertiary text-xs font-bold rounded-full">在线 NDVI 计算</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-4xl text-primary opacity-20 group-hover:opacity-100 transition-opacity">photo_camera</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<p class="text-on-surface-variant leading-relaxed">支持全波段（NIR, SWIR等）原生数据获取，AOI智能裁剪功能让您无需下载冗余影像，直接聚焦研究区域。</p>
+<div class="rounded-md overflow-hidden h-48 relative">
+<img alt="Earth Monitoring" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJx_yhhwVZAOtxaWnH97Hp8mKcQgnmsns2wASiMhvDf-WADgFZVlDy2feL49kETyiNMJAyjpjCi44SlDjCzfbIdoIv8B_sHTSWK3eu5a2f3jN9baO3zJKgXc5nxo28pBtrwhgh9fH-bqa6IEcMAx-4lRuG6IYMrE4oPuzEv-kodlLaDudDhs36mUxPyYePN4mOg1mpFRIiA2DFL_hGXlvZvetuglHc6B8amaedzKPY_JTT9oslG9V3JofNWwigjxQr0OyMPRfRaDY"/>
+</div>
+</div>
+</div>
+<!-- Radar Imagery -->
+<div class="md:col-span-4 bg-primary text-on-primary p-10 rounded-lg flex flex-col justify-between shadow-lg shadow-primary/20">
+<div>
+<span class="material-symbols-outlined text-4xl mb-6">radar</span>
+<h3 class="font-headline font-bold text-2xl mb-4">雷达影像黑科技</h3>
+<p class="text-on-primary/80 leading-relaxed mb-8">
+                                Sentinel-1 SAR 穿透云层，即使阴雨绵绵也能获取精准地表信息。支持 GRD &amp; RTC 模式。
+                            </p>
+</div>
+<div class="bg-white/10 p-4 rounded-md border border-white/20">
+<div class="flex justify-between text-xs font-bold opacity-80 mb-2">
+<span>探测深度</span>
+<span>98% 精确度</span>
+</div>
+<div class="w-full h-1.5 bg-white/20 rounded-full overflow-hidden">
+<div class="w-[98%] h-full bg-white"></div>
+</div>
+</div>
+</div>
+<!-- High Res DEM -->
+<div class="md:col-span-12 bg-surface-container-high p-10 rounded-lg flex flex-col md:flex-row items-center gap-12 border border-slate-100 shadow-sm">
+<div class="flex-1">
+<h3 class="font-headline font-bold text-3xl text-on-background mb-4">Copernicus DEM GLO-30</h3>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-6">
+                                全球 30 米分辨率高程数据，为地形分析、水文建模提供最可靠的基础。覆盖全球 99% 的陆地表面。
+                            </p>
+<ul class="space-y-3">
+<li class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+<span>垂直精度可达 2 米</span>
+</li>
+<li class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+<span>2024 最新版实时更新</span>
+</li>
+</ul>
+</div>
+<div class="w-full md:w-1/3 aspect-video bg-surface-dim rounded-md shadow-inner relative overflow-hidden flex items-center justify-center">
+<img alt="Terrain Data" class="absolute inset-0 w-full h-full object-cover opacity-50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdPQlVS71yH8nGARtAR0T0By5T7qBotm9W8jrKuhXt682bf6WhO9Di15MKMYIbmlneLd2Z48uh_8NTXPOrvxC3AKh8U5b-wBMX5kpZHpSfCWXhSKdXPPTYvlqftpZKOPWGKFtvKxuIJH9cNasi70QTs9BvroHJtVzJ6hAWZ3BCUUGhR8HYR7NydCobH26N92YFvnU-ZqJd7AYG3Xwdbd00GFCfkIwcO3IsIZQkxOEWmdd_Fn0pFQ7bsAoGhsOY7jV5iAbubP1BOaI"/>
+<span class="material-symbols-outlined text-primary text-5xl z-10">terrain</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Software Download Section (Optimized) -->
+<section class="py-24 px-12 mesh-bg relative overflow-hidden">
+<div class="max-w-[1920px] mx-auto">
+<div class="bg-white rounded-lg shadow-xl overflow-hidden flex flex-col lg:flex-row border border-slate-100">
+<div class="flex-1 p-12 lg:p-20">
+<span class="inline-block px-3 py-1 bg-primary/10 text-primary font-bold text-[10px] tracking-[0.2em] uppercase mb-6 rounded-full">Mobile Experience</span>
+<h2 class="font-headline font-extrabold text-4xl text-on-background mb-6">移动端 Geomapper 现已上线</h2>
+<p class="text-on-surface-variant text-lg mb-10 leading-relaxed">
+                            随时随地管理您的地理资产。从数据搜索到云端渲染，一切尽在掌握。告别传统的繁琐工作流，让地理制图像社交软件一样简单。
+                        </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
+<div class="flex items-start gap-4">
+<div class="bg-primary/10 p-2 rounded-md">
+<span class="material-symbols-outlined text-primary text-2xl">offline_pin</span>
+</div>
+<div>
+<h4 class="font-bold text-on-background mb-1">离线地图预览</h4>
+<p class="text-sm text-on-surface-variant">支持缓存矢量切片，野外作业也能看数据</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-primary/10 p-2 rounded-md">
+<span class="material-symbols-outlined text-primary text-2xl">cloud_sync</span>
+</div>
+<div>
+<h4 class="font-bold text-on-background mb-1">多端实时同步</h4>
+<p class="text-sm text-on-surface-variant">PC 选图，手机查看，数据无缝衔接</p>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-4">
+<button class="flex items-center gap-3 bg-on-background text-background px-6 py-3 rounded-full hover:opacity-90 transition-all active:scale-95">
+<span class="material-symbols-outlined">apple</span>
+<div class="text-left">
+<div class="text-[10px] font-medium leading-none opacity-60">Download on the</div>
+<div class="text-sm font-bold leading-none mt-1">App Store</div>
+</div>
+</button>
+<button class="flex items-center gap-3 bg-on-background text-background px-6 py-3 rounded-full hover:opacity-90 transition-all active:scale-95">
+<span class="material-symbols-outlined">play_arrow</span>
+<div class="text-left">
+<div class="text-[10px] font-medium leading-none opacity-60">Get it on</div>
+<div class="text-sm font-bold leading-none mt-1">Google Play</div>
+</div>
+</button>
+</div>
+</div>
+<div class="lg:w-[450px] bg-slate-50 p-12 lg:p-20 flex flex-col items-center justify-center text-center border-l border-slate-100">
+<div class="relative group cursor-pointer mb-6">
+<div class="absolute -inset-4 bg-primary/20 rounded-lg blur-xl group-hover:bg-primary/30 transition-all"></div>
+<div class="relative bg-white p-4 rounded-md shadow-md border border-slate-200">
+<img alt="App QR Code" class="w-48 h-48 object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0ujOG4ufL-oQf00u9zAoYqUcXHM_sfsauj3W-HFCwPeK8N6X04_YlkTE7VMdjm1nvhmN7L4KN2l1hV9Pllgrw91l_s2oaRiOEzxLEzwcaUZeQfNNxGRe40Rdvn71RDvjaeMCBEgWXVCpmIFt0DOpftLOzJAXAIpCRsqdglBpqk-reUsApMbuNHB6UXkMRCoBurVkliC3bdT2WEF6VuEAcLMT8LoKtBMA03m9St2EqpkeWrZji7QkHeApfyaHJYRqikxnaGQi2W82Dw"/>
+</div>
+</div>
+<h4 class="font-headline font-bold text-xl text-on-background mb-2">扫描下载 App</h4>
+<p class="text-on-surface-variant text-sm px-8">支持 iOS 与 Android 系统，扫码自动识别平台</p>
+<div class="mt-8 flex items-center gap-2 text-primary font-bold text-sm">
+<span class="material-symbols-outlined text-lg">verified_user</span>
+<span>官方安全认证</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Why Choose Us -->
+<section class="py-24 px-12 bg-background relative overflow-hidden border-t border-slate-100">
+<div class="max-w-[1920px] mx-auto">
+<div class="flex flex-col md:flex-row items-end justify-between mb-16">
+<div class="max-w-xl">
+<h2 class="font-headline font-extrabold text-4xl text-on-background mb-6">为什么选择 Geomapper?</h2>
+<p class="text-on-surface-variant text-lg">我们解决了科研与工程中最大的痛点：数据获取的“最后一公里”。</p>
+</div>
+<div class="hidden md:block">
+<span class="text-primary font-headline font-black text-8xl opacity-10 uppercase">Speed</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<div class="flex gap-8 group">
+<div class="w-20 h-20 shrink-0 bg-surface-container-high rounded-lg flex items-center justify-center transition-transform group-hover:scale-110 shadow-sm">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-2xl text-on-background mb-4">极速下载：秒杀官网</h4>
+<p class="text-on-surface-variant leading-relaxed">
+                                部署在国内核心城市的高性能中转节点，实测稳定下载速度可达 <span class="text-primary font-bold">10MB/s+</span>。告别 ESA 官网漫长的排队与不稳定的连接。
+                            </p>
+</div>
+</div>
+<div class="flex gap-8 group">
+<div class="w-20 h-20 shrink-0 bg-surface-container-high rounded-lg flex items-center justify-center transition-transform group-hover:scale-110 shadow-sm">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">smartphone</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-2xl text-on-background mb-4">轻量便携：手机即可操作</h4>
+<p class="text-on-surface-variant leading-relaxed">
+                                无需安装臃肿的 GIS 软件，一个手机 APP 即可实现选图、自动渲染预览与云端保存。随时随地进行数据验证与初步分析。
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Us Section (Optimized Customer Support Area) -->
+<section class="py-24 px-12 bg-slate-50">
+<div class="max-w-[1920px] mx-auto">
+<div class="glass-panel rounded-lg p-12 lg:p-20 shadow-2xl border border-white/40 overflow-hidden relative">
+<div class="absolute top-0 left-0 w-2 h-full bg-primary"></div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div>
+<span class="text-primary font-bold tracking-widest text-xs uppercase mb-4 block">Get In Touch</span>
+<h2 class="font-headline font-extrabold text-4xl text-on-background mb-8 leading-tight">需要专业的技术支持或<br/>定制化行业解决方案？</h2>
+<p class="text-on-surface-variant text-lg mb-10 leading-relaxed">
+                                我们的专家团队随时待命，为您解答关于卫星数据处理、API 集成及大规模影像分析的任何疑问。加入 Geomapper 社区，与万千专业人士共同探讨。
+                            </p>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<span class="font-medium text-on-surface">support@geomapper.cn</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<span class="font-medium text-on-surface">上海市浦东新区张江高科技园区 算力大厦 12F</span>
+</div>
+</div>
+</div>
+<div class="bg-white/50 p-1 rounded-md shadow-inner">
+<div class="bg-white rounded-md p-8 lg:p-12 shadow-sm grid grid-cols-1 sm:grid-cols-2 gap-12">
+<div class="text-center group">
+<div class="mb-6 relative inline-block">
+<div class="absolute inset-0 bg-primary/5 rounded-lg scale-110 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+<img alt="Technical Support" class="w-40 h-auto rounded-md relative border border-slate-100" src="https://lh3.googleusercontent.com/aida/ADBb0ujHmEf6ZVgxbp6FTHZDIE6sqpLNkRxI0gE-N1-M3utuwvC_OQNofykwxW6lz3AkivC-ZY6IYJ7DdIiNnOFK0yBBurChMDre0EqsWxpj1EFNcGwDTrFz9uRUCqCLJzWT3JK6EfiAIq5MlisxArnuomoguoApTpUQ2Da_ap8EdvSKuYMi7_nF9Gpe2FCeH-r6YIVr1tY_JM2qGrgEyEHXd_wJyHnWayZEa2gzBejeESXCyntVsujh_4sy7mglz5O6teMeufeDxvrE0A"/>
+</div>
+<div class="flex items-center justify-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-xl">forum</span>
+<h4 class="font-headline font-bold text-lg text-on-background">技术支持群</h4>
+</div>
+<p class="text-xs text-on-surface-variant font-medium">即时反馈数据获取与处理疑难</p>
+</div>
+<div class="text-center group border-t sm:border-t-0 sm:border-l border-slate-100 pt-12 sm:pt-0 sm:pl-12">
+<div class="mb-6 relative inline-block">
+<div class="absolute inset-0 bg-primary/5 rounded-lg scale-110 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+<img alt="Business Inquiry" class="w-40 h-auto rounded-md relative border border-slate-100" src="https://lh3.googleusercontent.com/aida/ADBb0uiMMASvHiwPKjys4QhNKOqPR43WU719edfRlSvHzOqJ5Bk2JLKcRboLsu-21Da9lD7ZlzyQYFtH-IauAhKVpYKTNDSQ_Mny8_exvgFPI6J5PWzDZ_TlzDIUNEsOYVnOEIlb1zd7ZxROW5eztoIVzcgt_ZeCr-Z6cQETphsQiNVkh86Elkx9zDaunbob4r5-8T9Qs-z51GzHYw7tXzSWFaLiboMO6mJmrewLcOAxcsOU7CpU6P3YUY1EP7rsS2Q6U64dhDVYPWIsrQ"/>
+</div>
+<div class="flex items-center justify-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-xl">handshake</span>
+<h4 class="font-headline font-bold text-lg text-on-background">商务咨询处</h4>
+</div>
+<p class="text-xs text-on-surface-variant font-medium">定制大客户方案及政企服务</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-24 px-12 bg-white">
+<div class="max-w-[1920px] mx-auto bg-surface-container-lowest rounded-lg p-12 lg:p-20 flex flex-col items-center text-center shadow-sm border border-slate-100">
+<h3 class="font-headline font-bold text-3xl text-on-background mb-6">准备好开始您的探索了吗？</h3>
+<p class="text-on-surface-variant mb-10 max-w-2xl">立即加入 10,000+ 专业遥感工作者的选择，体验前所未有的地理数据处理速度。</p>
+<div class="flex flex-wrap justify-center gap-4">
+<button class="bg-primary text-on-primary px-10 py-4 rounded-full font-bold shadow-lg hover:shadow-primary/30 transition-all active:scale-95">注册新账号</button>
+<button class="outline outline-1 outline-outline text-on-background px-10 py-4 rounded-full font-bold hover:bg-surface-container transition-all active:scale-95">咨询方案</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-16 px-12 bg-slate-100 text-slate-500 font-['Inter'] text-xs leading-relaxed">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-[1920px] mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="font-['Manrope'] font-bold text-lg text-slate-900 mb-4">Geomapper V2.0</div>
+<p class="mb-6 leading-relaxed">专业地理数据制图平台，致力于提升地理信息获取与处理效率。</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">share</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">mail</span>
+</div>
+</div>
+<div>
+<h5 class="font-bold text-slate-900 mb-4">产品中心</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-blue-500 transition-colors" href="#">Sentinel 数据下载</a></li>
+<li><a class="hover:text-blue-500 transition-colors" href="#">Landsat 影像分析</a></li>
+<li><a class="hover:text-blue-500 transition-colors" href="#">DEM 地形服务</a></li>
+<li><a class="hover:text-blue-500 transition-colors" href="#">NDVI 在线计算</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-slate-900 mb-4">开发者</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-blue-500 transition-colors" href="#">API 文档</a></li>
+<li><a class="hover:text-blue-500 transition-colors" href="#">SDK 下载</a></li>
+<li><a class="hover:text-blue-500 transition-colors" href="#">开源社区</a></li>
+<li><a class="hover:text-blue-500 transition-colors" href="#">版本记录</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-slate-900 mb-4">合规与支持</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-blue-500 transition-colors" href="#">隐私政策</a></li>
+<li><a class="hover:text-blue-500 transition-colors" href="#">服务条款</a></li>
+<li><a class="hover:text-blue-500 transition-colors" href="#">联系支持</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-[1920px] mx-auto pt-12 mt-12 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
+<p>© 2024 Geomapper V2.0. 专业地理数据制图平台.</p>
+<div class="flex gap-6">
+<a class="hover:text-blue-500 transition-colors" href="#">隐私政策</a>
+<a class="hover:text-blue-500 transition-colors" href="#">服务条款</a>
+<a class="hover:text-blue-500 transition-colors" href="#">联系支持</a>
+<a class="hover:text-blue-500 transition-colors" href="#">API文档</a>
+</div>
+</div>
+</footer>
+</body></html>
